@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+    <input type="text" id='i1'>
+    <button class='b1' onclick="baidu()">百度一下</button>
+    <ul></ul>
+    </div>
+</body>
+<script>
+    var oInput = document.getElementsByTagName('input')[0];
+    var oUl = document.getElementsByTagName('ul')[0];
+    var oButton = document.getElementsByTagName('button')[0];
+    
+    function doJson(data){
+        var list = data.s;
+        oUl.innerHTML = '';
+        if(list.length == 0){
+            oUl.style.display = 'none';  
+        }else{
+            list.forEach(function(item, index){
+            var oLi = document.createElement('li');
+            var oA = document.createElement('a');
+            oA.href = 'https://www.baidu.com/s?wd=' + item;
+            oA.innerText = item;
+            oLi.appendChild(oA);  
+            oUl.appendChild(oLi);
+            oUl.style.display = 'block';
+
+            })
+            }
+       
+    }
+ 
+    var baidu = function(){
+        var href = document.getElementById('i1').value;
+        window.open('https://www.baidu.com/s?wd=' + href);
+    }
+    oInput.onkeyup = function(){
+        var val = this.value
+        var oScript = document.createElement('script')
+        oScript.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' + val + '&cb=doJson'
+        document.body.appendChild(oScript)
+        document.body.removeChild(oScript)
+    }
+    
+</script>
+<style>
+    * {
+        padding: 0px;
+        margin:0px;
+        list-style:none ;
+        
+    }
+    input {
+        margin-top: 2px;
+        width:300px;
+        height:30px;
+        float: left;
+    }
+    button {
+        width: 100px;
+        height: 36px;
+        float: left;
+        margin-left: 20px;
+        background: rgb(190, 190, 243);
+        font-size: 18px;
+        border-radius: 3px;
+    }
+    ul {
+        float: left;
+        width:300px;
+        border:1px solid black;
+        display: none;
+        
+    }
+    div {
+        width:600px;
+        margin-top:10px;
+        margin-left:100px;
+    }
+    li {
+        margin-top:3px;
+        margin-bottom:3px;
+        margin-left:8px;
+    }
+    a {
+        text-decoration: none;   
+    }
+</style>
+</html>
